@@ -60,6 +60,7 @@ class OfficesController extends AppController {
  * @return void
  */
 	public function edit($id = null) {
+		$this -> layout="mapas";
 		$this->Office->id = $id;
 		if (!$this->Office->exists()) {
 			throw new NotFoundException(__('Invalid office'));

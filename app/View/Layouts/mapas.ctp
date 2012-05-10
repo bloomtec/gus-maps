@@ -31,9 +31,11 @@
 		<?php
 		echo $this -> Html -> meta('icon');
 		echo $this -> Html -> css('styles');
+		echo $this -> Html -> css('jquery-ui-1.8.20.custom');
 		echo $this -> Html -> css('gmap');
 		echo $this -> Html -> script('jquery');
 		echo $this -> Html -> script('jquery.tools.min');
+		echo $this -> Html -> script("jquery-ui-1.8.20.custom.min");
 		echo $this -> Html -> script('bjs');
 		echo $this -> Html -> script('default');
 		echo $this -> Html -> script('common');

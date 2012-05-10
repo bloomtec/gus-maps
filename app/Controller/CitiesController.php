@@ -7,7 +7,13 @@ App::uses('AppController', 'Controller');
  */
 class CitiesController extends AppController {
 
-
+	function getCoordinates($id = null){
+		$this -> City -> recursive = -1;
+		$city=$this->City->read(null,$id);
+		$latLgn=array('lat'=>$city['City']['latitud'],'lng'=>$city['City']['longitud']);
+		echo json_encode($latLgn);
+		exit(0);
+	}
 /**
  * index method
  *
@@ -38,6 +44,7 @@ class CitiesController extends AppController {
  * @return void
  */
 	public function add() {
+	$this->layout="mapas";
 		if ($this->request->is('post')) {
 			$this->City->create();
 			if ($this->City->save($this->request->data)) {
@@ -56,6 +63,7 @@ class CitiesController extends AppController {
  * @return void
  */
 	public function edit($id = null) {
+		$this->layout="mapas";
 		$this->City->id = $id;
 		if (!$this->City->exists()) {
 			throw new NotFoundException(__('Invalid city'));

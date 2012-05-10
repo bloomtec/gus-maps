@@ -37,7 +37,8 @@ $(function(){
 			url : url,
 			type : "GET",
 			cache : false,
-			dataType : "json",
+			crossDomain : true,
+			dataType: 'jsonp',
 			data : params,
 			success : callback
 		});
