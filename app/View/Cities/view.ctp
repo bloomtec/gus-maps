@@ -1,11 +1,6 @@
 <div class="cities view">
-<h2><?php  echo __('City');?></h2>
+<h2><?php  echo __('Ciudad');?></h2>
 	<dl>
-		<dt><?php echo __('Id'); ?></dt>
-		<dd>
-			<?php echo h($city['City']['id']); ?>
-			&nbsp;
-		</dd>
 		<dt><?php echo __('Nombre'); ?></dt>
 		<dd>
 			<?php echo h($city['City']['nombre']); ?>
@@ -21,6 +16,16 @@
 			<?php echo h($city['City']['image']); ?>
 			&nbsp;
 		</dd>
+		<dt><?php echo __('Latitud'); ?></dt>
+		<dd>
+			<?php echo h($city['City']['latitud']); ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('Longitud'); ?></dt>
+		<dd>
+			<?php echo h($city['City']['longitud']); ?>
+			&nbsp;
+		</dd>
 		<dt><?php echo __('Created'); ?></dt>
 		<dd>
 			<?php echo h($city['City']['created']); ?>
@@ -34,14 +39,11 @@
 	</dl>
 </div>
 <div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
+	<h3><?php echo __('Acciones'); ?></h3>
 	<ul>
-		<li><?php echo $this->Html->link(__('Edit City'), array('action' => 'edit', $city['City']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete City'), array('action' => 'delete', $city['City']['id']), null, __('Are you sure you want to delete # %s?', $city['City']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Cities'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New City'), array('action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Offices'), array('controller' => 'offices', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Office'), array('controller' => 'offices', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('Modificar'), array('action' => 'edit', $city['City']['id'])); ?> </li>
+		<li><?php echo $this->Html->link(__('Volver'), array('action' => 'index')); ?> </li>
+	
 	</ul>
 </div>
 <div class="related">
