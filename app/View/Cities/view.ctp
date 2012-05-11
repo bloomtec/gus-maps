@@ -11,11 +11,11 @@
 			<?php echo h($city['City']['descripcion']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Imagen'); ?></dt>
+		<!--<dt><?php echo __('Imagen'); ?></dt>
 		<dd>
 			<?php echo h($city['City']['image']); ?>
 			&nbsp;
-		</dd>
+		</dd>-->
 		<dt><?php echo __('Latitud'); ?></dt>
 		<dd>
 			<?php echo h($city['City']['latitud']); ?>

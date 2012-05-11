@@ -5,7 +5,7 @@
 			<th><?php echo $this->Paginator->sort('id', __('ID', true));?></th>
 			<th><?php echo $this->Paginator->sort('nombre', __('Nombre', true));?></th>
 			<th><?php echo $this->Paginator->sort('descripcion', __('Descripción', true));?></th>
-			<th><?php echo $this->Paginator->sort('image', __('Imagenh', true));?></th>
+			<!--<th><?php echo $this->Paginator->sort('image', __('Imagenh', true));?></th>-->
 			<th><?php echo $this->Paginator->sort('created', __('Creado', true));?></th>
 			<th><?php echo $this->Paginator->sort('modified', __('Modificado', true));?></th>
 			<th class="actions"><?php echo __('Acciones');?></th>
@@ -17,7 +17,7 @@
 		<td><?php echo h($city['City']['id']); ?>&nbsp;</td>
 		<td><?php echo h($city['City']['nombre']); ?>&nbsp;</td>
 		<td><?php echo h($city['City']['descripcion']); ?>&nbsp;</td>
-		<td><?php echo h($city['City']['image']); ?>&nbsp;</td>
+		<!--<td><?php echo h($city['City']['image']); ?>&nbsp;</td>-->
 		<td><?php echo h($city['City']['created']); ?>&nbsp;</td>
 		<td><?php echo h($city['City']['modified']); ?>&nbsp;</td>
 		<td class="actions">
