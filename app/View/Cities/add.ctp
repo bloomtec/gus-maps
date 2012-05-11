@@ -5,7 +5,7 @@
 	<?php
 		echo $this->Form->input('direccion_geografica',array('label'=>'Direción Geografica','class'=>'cityQuery'));
 		echo $this->Form->input('nombre');
-		echo $this->Form->input('descripcion');
+		echo $this->Form->input('descripcion', array('label' => 'Descripción'));
 		echo $this->Form->input('latitud',array('class'=>'lat'));
 		echo $this->Form->input('longitud',array('class'=>'lng'));
 		
