@@ -42,7 +42,7 @@ class AppController extends Controller {
 	        'authenticate' => array(
 	            'Form' => array(
 	                'fields' => array(
-	                	'username' => 'email',
+	                	'username' => 'username',
 	                	'password' => 'password'
 	                ),
 	                'scope' => array('is_active' => true)

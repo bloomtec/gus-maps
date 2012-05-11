@@ -1,12 +1,10 @@
-<!--
 <div class='login'>
 	<?php echo $this -> Form -> create('User', array('action' => 'login'));?>
 	<legend>
-		<?php __('Login', true);?>
+		<?php __('Iniciar Sesión', true);?>
 	</legend>
-	<?php echo $this -> Form -> input('email', array('type' => 'email', 'required' => 'required'));?>
-	<?php echo $this -> Form -> input('password', array('required' => 'required'));?>
+	<?php echo $this -> Form -> input('username', array('label' => __('Usuario', true), 'required' => 'required'));?>
+	<?php echo $this -> Form -> input('password', array('label' => __('Contraseña', true), 'required' => 'required'));?>
 	<?php echo $this -> Form -> end(__('Login', true));?>
 </div>
--->
-<?php echo $this -> element('ajax-login');?>
+<?php //echo $this -> element('ajax-login');?>

@@ -13,7 +13,6 @@ class UsersController extends AppController {
 	 * @return void
 	 */
 	public function login() {
-		
 		$this -> layout = "login";
 		if ($this -> request -> is('ajax')) {
 			if ($this -> Auth -> login()) {
@@ -22,7 +21,7 @@ class UsersController extends AppController {
 				$user['success'] = true;
 				echo json_encode($user);
 			} else {
-				$response['message'] = __('Username or password is incorrect', true);
+				$response['message'] = __('Usuario o contraseña no válidos', true);
 				$response['success'] = false;
 				$this -> capchaFuncionality();
 				echo json_encode($response);
@@ -34,7 +33,7 @@ class UsersController extends AppController {
 				return $this -> redirect($this -> Auth -> redirect());
 			} else {
 				$this -> capchaFuncionality();
-				$this -> Session -> setFlash(__('Username or password is incorrect'), 'default', array(), 'auth');
+				$this -> Session -> setFlash(__('Usuario o contraseña no válidos'), 'default', array(), 'auth');
 			}
 		}
 	}
@@ -59,7 +58,7 @@ class UsersController extends AppController {
 			$this -> request -> data['User']['role_id'] = 2;
 			$this -> request -> data['User']['is_active'] = true;
 			if ($this -> User -> save($this -> request -> data)) {
-				$this -> Session -> setFlash(__('The user has been saved'), 'crud/success');
+				$this -> Session -> setFlash(__('Se guardó el usuario'), 'crud/success');
 				// Generar el codigo para el correo de registro
 				$code = crypt($this -> User -> id, '23()23*$%g4F^aN!^^%');
 				$code = urlencode($code);
@@ -107,6 +106,7 @@ class UsersController extends AppController {
 	 *
 	 * @return void
 	 */
+	/*
 	public function validateEmail($code = 'null') {
 
 		if ($this -> request -> is('post')) {
@@ -145,6 +145,7 @@ class UsersController extends AppController {
 		}
 
 	}
+	 */
 
 	function changePassword($id = null) {
 		$this->layout="profile";
@@ -228,6 +229,7 @@ class UsersController extends AppController {
 	 *
 	 * @return void
 	 */
+	/*
 	public function capchaFuncionality() {
 		if (Configure::read('capcha')) {
 			$logginAttempts = $this -> Session -> read('loginAttempts');
@@ -239,15 +241,18 @@ class UsersController extends AppController {
 		}
 		return true;
 	}
+	 */
 
 	/**
 	 * capcha generator method
 	 *
 	 * @return void
 	 */
+	/*
 	public function capcha() {
 
 	}
+	 */
 
 	/**
 	 * index method
@@ -286,10 +291,10 @@ class UsersController extends AppController {
 		}
 		if ($this -> request -> is('post') || $this -> request -> is('put')) {
 			if ($this -> User -> save($this -> request -> data)) {
-				$this -> Session -> setFlash(__('The user has been saved'));
+				$this -> Session -> setFlash(__('Se guardó el usuario'));
 				$this -> redirect(array('action' => 'index'));
 			} else {
-				$this -> Session -> setFlash(__('The user could not be saved. Please, try again.'));
+				$this -> Session -> setFlash(__('No se pudo guardar el usuario. Por favor, intente de nuevo.'));
 			}
 		} else {
 			$this -> request -> data = $this -> User -> read(null, $id);
@@ -303,6 +308,7 @@ class UsersController extends AppController {
 	 *
 	 * @return void
 	 */
+	/*
 	public function admin_login() {
 		$this -> layout = "ez/login";
 		if ($this -> request -> is('ajax')) {
@@ -312,7 +318,7 @@ class UsersController extends AppController {
 				$user['success'] = true;
 				echo json_encode($user);
 			} else {
-				$response['message'] = __('Username or password is incorrect', true);
+				$response['message'] = __('Usuario o contraseña no válidos', true);
 				$response['success'] = false;
 				$this -> capchaFuncionality();
 				echo json_encode($response);
@@ -324,19 +330,22 @@ class UsersController extends AppController {
 				return $this -> redirect($this -> Auth -> redirect());
 			} else {
 				$this -> capchaFuncionality();
-				$this -> Session -> setFlash(__('Username or password is incorrect'), 'default', array(), 'auth');
+				$this -> Session -> setFlash(__('Usuario o contraseña no válidos'), 'default', array(), 'auth');
 			}
 		}
 	}
+	 */
 
 	/**
 	 * logout method
 	 *
 	 * @return void
 	 */
+	/*
 	public function admin_logout() {
 		$this -> redirect($this -> Auth -> logout());
 	}
+	 */
 
 	/**
 	 * admin_index method
@@ -354,6 +363,7 @@ class UsersController extends AppController {
 	 * @param string $id
 	 * @return void
 	 */
+	/*
 	public function admin_view($id = null) {
 		$this -> User -> id = $id;
 		if (!$this -> User -> exists()) {
@@ -361,6 +371,7 @@ class UsersController extends AppController {
 		}
 		$this -> set('user', $this -> User -> read(null, $id));
 	}
+	 */
 
 	/**
 	 * admin_add method
@@ -371,10 +382,10 @@ class UsersController extends AppController {
 		if ($this -> request -> is('post')) {
 			$this -> User -> create();
 			if ($this -> User -> save($this -> request -> data)) {
-				$this -> Session -> setFlash(__('The user has been saved'));
+				$this -> Session -> setFlash(__('Se guardó el usuario'));
 				$this -> redirect(array('action' => 'index'));
 			} else {
-				$this -> Session -> setFlash(__('The user could not be saved. Please, try again.'));
+				$this -> Session -> setFlash(__('No se pudo guardar el usuario. Por favor, intente de nuevo.'));
 			}
 		}
 		$roles = $this -> User -> Role -> find('list');
@@ -387,6 +398,7 @@ class UsersController extends AppController {
 	 * @param string $id
 	 * @return void
 	 */
+	/*
 	public function admin_edit($id = null) {
 		$this -> User -> id = $id;
 		if (!$this -> User -> exists()) {
@@ -394,10 +406,10 @@ class UsersController extends AppController {
 		}
 		if ($this -> request -> is('post') || $this -> request -> is('put')) {
 			if ($this -> User -> save($this -> request -> data)) {
-				$this -> Session -> setFlash(__('The user has been saved'));
+				$this -> Session -> setFlash(__('Se guardó el usuario'));
 				$this -> redirect(array('action' => 'index'));
 			} else {
-				$this -> Session -> setFlash(__('The user could not be saved. Please, try again.'));
+				$this -> Session -> setFlash(__('No se pudo guardar el usuario. Por favor, intente de nuevo.'));
 			}
 		} else {
 			$this -> request -> data = $this -> User -> read(null, $id);
@@ -405,6 +417,7 @@ class UsersController extends AppController {
 		$roles = $this -> User -> Role -> find('list');
 		$this -> set(compact('roles'));
 	}
+	 */
 
 	/**
 	 * admin_delete method
