@@ -2,12 +2,12 @@
 <h2><?php  echo __('Oficina');?></h2>
 	<dl>
 		
-		<dt><?php echo __('Office Type'); ?></dt>
+		<dt><?php echo __('Tipo De Oficina'); ?></dt>
 		<dd>
 			<?php echo $this->Html->link($office['OfficeType']['nombre'], array('controller' => 'office_types', 'action' => 'view', $office['OfficeType']['id'])); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('City'); ?></dt>
+		<dt><?php echo __('Ciudad'); ?></dt>
 		<dd>
 			<?php echo $this->Html->link($office['City']['nombre'], array('controller' => 'cities', 'action' => 'view', $office['City']['id'])); ?>
 			&nbsp;
@@ -17,12 +17,12 @@
 			<?php echo h($office['Office']['nombre']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Direccion'); ?></dt>
+		<dt><?php echo __('Dirección'); ?></dt>
 		<dd>
 			<?php echo h($office['Office']['direccion']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Descripcion'); ?></dt>
+		<dt><?php echo __('Descripción'); ?></dt>
 		<dd>
 			<?php echo h($office['Office']['descripcion']); ?>
 			&nbsp;
@@ -37,12 +37,12 @@
 			<?php echo h($office['Office']['longitud']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Created'); ?></dt>
+		<dt><?php echo __('Creado'); ?></dt>
 		<dd>
 			<?php echo h($office['Office']['created']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Modified'); ?></dt>
+		<dt><?php echo __('Modificado'); ?></dt>
 		<dd>
 			<?php echo h($office['Office']['modified']); ?>
 			&nbsp;

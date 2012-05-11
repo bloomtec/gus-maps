@@ -5,8 +5,8 @@
 	<?php
 		echo $this->Form->input('id');
 		echo $this->Form->input('nombre');
-		echo $this->Form->input('descripcion');
-		echo $this->Form->input('icono_image');
+		echo $this->Form->input('descripcion', array('label'=>'Descripción'));
+		echo $this->Form->input('icono_image', array('label' => 'Ícono'));
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Guardar'));?>

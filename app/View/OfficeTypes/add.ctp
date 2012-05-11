@@ -4,8 +4,8 @@
 		<legend><?php echo __('Añadir Tipo de Oficina'); ?></legend>
 	<?php
 		echo $this->Form->input('nombre');
-		echo $this->Form->input('descripcion');
-		echo $this->Form->input('icono_image');
+		echo $this->Form->input('descripcion', array('label'=>'Descripción'));
+		echo $this->Form->input('icono_image', array('label' => 'Ícono'));
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Guardar'));?>
