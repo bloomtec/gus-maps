@@ -51,7 +51,7 @@
 				
 			</div>
 			<div id="footer">
-				desarrollado por colombia solutions
+				Desarrollado por colombia solutions
 			</div>
 			
 		</div>
