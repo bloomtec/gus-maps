@@ -38,12 +38,52 @@ class OfficeTypesController extends AppController {
 	 */
 	public function add() {
 		if ($this -> request -> is('post')) {
+			if (!empty($this -> request -> data['OfficeType']['icono_image']['name']) && !$this -> request -> data['OfficeType']['icono_image']['error']) {
+				$now = new DateTime('now');
+				$filename = $now -> format('Y-m-d_H-i-s') . '_' . str_replace(' ', '_', $this -> request -> data['OfficeType']['icono_image']['name']);
+				if ($this -> uploadFile($this -> request -> data['OfficeType']['icono_image']['tmp_name'], $filename)) {
+					$this -> request -> data['OfficeType']['icono_image'] = 'img' . DS . 'uploads' . DS . $filename;
+				}
+			}
 			$this -> OfficeType -> create();
 			if ($this -> OfficeType -> save($this -> request -> data)) {
 				$this -> Session -> setFlash(__('Se guardó el tipo de oficina'), 'crud/success');
 				$this -> redirect(array('action' => 'index'));
 			} else {
 				$this -> Session -> setFlash(__('No se pudo guardar el tipo de oficina. Por favor, intente de nuevo.'), 'crud/error');
+			} 
+		}
+	}
+	
+	private function uploadFile($tmp_name = null, $filename = null) {
+		$this -> cleanupFiles();
+		if ($tmp_name && $filename) {
+			$url = 'img' . DS .'uploads' . DS . DS . $filename;
+			return move_uploaded_file($tmp_name, $url);
+		}
+	}
+
+	private function cleanupFiles() {
+		$officeTypes = $this -> OfficeType -> find('all');
+		$db_files = array();
+		foreach ($officeTypes as $key => $officeType) {
+			$db_files[] = $officeTypes['OfficeType']['icono_image'];
+		}
+		$dir_files = array();
+		$dir_path = APP . 'webroot' . DS . 'img' . DS . 'uploads';
+		if ($handle = opendir($dir_path)) {
+			while (false !== ($entry = readdir($handle))) {
+				if ($entry != 'empty' && is_file($dir_path . DS . $entry))
+					$dir_files[] = 'img'. DS . 'uploads' . DS . $entry;
+			}
+			closedir($handle);
+		}
+		foreach ($dir_files as $file) {
+			if (!in_array($file, $db_files)) {
+				$file = explode(DS, $file);
+				$file = $file[count($file) - 1];
+				$tmp_file_path = $dir_path . DS . $file;
+				unlink($tmp_file_path);
 			}
 		}
 	}
