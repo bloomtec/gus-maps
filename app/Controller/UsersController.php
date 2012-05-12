@@ -23,7 +23,6 @@ class UsersController extends AppController {
 			} else {
 				$response['message'] = __('Usuario o contraseña no válidos', true);
 				$response['success'] = false;
-				$this -> capchaFuncionality();
 				echo json_encode($response);
 			}
 			$this -> autoRender = false;
@@ -32,7 +31,6 @@ class UsersController extends AppController {
 			if ($this -> Auth -> login()) {
 				return $this -> redirect($this -> Auth -> redirect());
 			} else {
-				$this -> capchaFuncionality();
 				$this -> Session -> setFlash(__('Usuario o contraseña no válidos'), 'default', array(), 'auth');
 			}
 		}

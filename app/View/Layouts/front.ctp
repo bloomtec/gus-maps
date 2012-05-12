@@ -27,20 +27,22 @@
 			if(isset($title_for_layout)) echo $title_for_layout;
 		?>
 		</title>
+		<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false&region=co"></script>
 		<?php
 			echo $this -> Html -> meta('icon');
-			echo $this -> Html -> css('styles');
+			echo $this -> Html -> css('front');
 			echo $this -> Html -> script('jquery');
 			echo $this -> Html -> script('jquery.tools.min');
 			echo $this -> Html -> script('bjs');
-			echo $this -> Html -> script('default');
-			echo $this -> Html -> script('common');
+			echo $this -> Html -> script('gmap_front');
+			//echo $this -> Html -> script('front');
 			echo $scripts_for_layout;
 		?>
 	</head>
 	<body>
+		
 		<div id="container">
-			<?php echo $this -> element('header'); ?>
+			<?php //echo $this -> element('header'); ?>
 			<div id="content">
 				<?php echo $this -> Session -> flash('auth'); ?>
 				<?php echo $this -> Session -> flash(); ?>
@@ -48,11 +50,11 @@
 				<?php echo $content_for_layout; ?>
 				
 			</div>
-			<?php echo $this -> element('footer'); ?>
+			<div id="footer">
+				desarrollado por colombia solutions
+			</div>
 			
 		</div>
-		<?php echo $this -> element('menu'); ?>
-		
 		<?php echo $this -> element('sql_dump'); ?>
 	</body>
 </html>
