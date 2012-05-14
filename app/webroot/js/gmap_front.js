@@ -77,24 +77,32 @@ function handleNoGeolocation(errorFlag) {
 }
 
 function getOffices() {
-	if(markers.length){
-		for( i in markers){
-			markers[i].setMap(null);
+	if(BJS.objectSize(markers)) {
+		for(i in markers) {
+			markers[i]['marker'].setMap(null);
+			markers[i]['infowindow'].setMap(null);
 		}
-		markers.length=0;
+		markers.length = 0;
 	}
 	BJS.JSON('/cities/getOffices/' + $('#ciudad option:selected').val() + '/' + $('#tipo option:selected').val(), {}, function(offices) {
 		$.each(offices, function(i, val) {
-			console.log(val);
+			markers[val.Office.id]=[];
 			coordinates = new google.maps.LatLng(val.Office.latitud, val.Office.longitud);
-				markers[val.Office.id] = new google.maps.Marker({
+			markers[val.Office.id]['marker'] = new google.maps.Marker({
 				position : coordinates,
 				map : map,
 				draggable : true,
-				title :val.Office.nombre,
-				icon:'../img/'+val.TypeOffice.image
+				title : val.Office.nombre,
+				icon : '../' + val.OfficeType.icono_image
 			});
-			markers[val.Office.id].setPosition(coordinates);
+			markers[val.Office.id]['marker'].setPosition(coordinates);
+			var contentString = '<div id="office-info">' + '<div class="name">' + val.Office.nombre + '</div>' + '<div class="description">' + val.Office.descripcion + '</div>' + '<div class="address">' + val.Office.direccion + '</div>' + '</div>';
+			markers[val.Office.id]['infowindow'] = new google.maps.InfoWindow({
+				content : contentString
+			});
+			google.maps.event.addListener(markers[val.Office.id]['marker'], 'click', function() {
+				markers[val.Office.id]['infowindow'].open(map, markers[val.Office.id]['marker']);
+			});
 		});
 		//marker.setPosition(coordinates);
 	});

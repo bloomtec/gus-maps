@@ -27,13 +27,13 @@ class CitiesController extends AppController {
 		$offices = null;
 		if (!$id) {// decuelve las oficinas sin filtrar por ciudad
 			if ($officeTypeId) {
-				$offices = $this -> City -> Office -> find('all', array('conditions' => array('offict_type_id' => $officeTypeId)));
+				$offices = $this -> City -> Office -> find('all', array('conditions' => array('office_type_id' => $officeTypeId)));
 			} else {
 				$offices = $this -> City -> Office -> find('all');
 			}
 		} else {
 			if ($officeTypeId) {
-				$offices = $this -> City -> Office -> find('all', array('conditions' => array('city_id' => $id, 'offict_type_id' => $officeTypeId)));
+				$offices = $this -> City -> Office -> find('all', array('conditions' => array('city_id' => $id, 'office_type_id' => $officeTypeId)));
 			} else {
 				$offices = $this -> City -> Office -> find('all', array('conditions' => array('city_id' => $id)));
 			}
