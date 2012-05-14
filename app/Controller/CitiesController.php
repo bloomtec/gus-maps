@@ -7,11 +7,38 @@ App::uses('AppController', 'Controller');
  */
 class CitiesController extends AppController {
 
-	function getCoordinates($id = null) {
+	public function beforeFilter() {
+		$this -> Auth -> allow('getCoordinates', 'getOffices');
+	}
+
+	public function getCoordinates($id = null) {
+		if (!$id) {
+			echo false;
+			exit(0);
+		}
 		$this -> City -> recursive = -1;
 		$city = $this -> City -> read(null, $id);
 		$latLgn = array('lat' => $city['City']['latitud'], 'lng' => $city['City']['longitud']);
 		echo json_encode($latLgn);
+		exit(0);
+	}
+
+	public function getOffices($id = null, $officeTypeId = null) {
+		$offices = null;
+		if (!$id) {// decuelve las oficinas sin filtrar por ciudad
+			if ($officeTypeId) {
+				$offices = $this -> City -> Office -> find('all', array('conditions' => array('offict_type_id' => $officeTypeId)));
+			} else {
+				$offices = $this -> City -> Office -> find('all');
+			}
+		} else {
+			if ($officeTypeId) {
+				$offices = $this -> City -> Office -> find('all', array('conditions' => array('city_id' => $id, 'offict_type_id' => $officeTypeId)));
+			} else {
+				$offices = $this -> City -> Office -> find('all', array('conditions' => array('city_id' => $id)));
+			}
+		}
+		echo json_encode($offices);
 		exit(0);
 	}
 
