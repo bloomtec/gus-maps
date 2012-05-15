@@ -59,6 +59,7 @@ class CitiesController extends AppController {
 	 * @return void
 	 */
 	public function view($id = null) {
+		$this -> layout = "mapas";
 		$this -> City -> id = $id;
 		if (!$this -> City -> exists()) {
 			throw new NotFoundException(__('Ciudad no válida'));

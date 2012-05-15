@@ -2,3 +2,8 @@
 	height: 600px;
 	width:100%;
 }
+.mapView{
+	height: 400px;
+	width:50%;
+	float:left;
+}

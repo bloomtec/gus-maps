@@ -28,14 +28,12 @@
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Latitud'); ?></dt>
-		<dd>
+		<dd class="lat">
 			<?php echo h($office['Office']['latitud']); ?>
-			&nbsp;
 		</dd>
 		<dt><?php echo __('Longitud'); ?></dt>
-		<dd>
+		<dd class="lng">
 			<?php echo h($office['Office']['longitud']); ?>
-			&nbsp;
 		</dd>
 		<dt><?php echo __('Creado'); ?></dt>
 		<dd>
@@ -48,6 +46,9 @@
 			&nbsp;
 		</dd>
 	</dl>
+	<div id="office-view-map" class='mapView'>
+		
+	</div>
 </div>
 <div class="actions">
 	<h3><?php echo __('Acciones'); ?></h3>
