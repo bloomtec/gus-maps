@@ -51,7 +51,39 @@ class OfficeTypesController extends AppController {
 				$this -> redirect(array('action' => 'index'));
 			} else {
 				$this -> Session -> setFlash(__('No se pudo guardar el tipo de oficina. Por favor, intente de nuevo.'), 'crud/error');
-			} 
+			}
+		}
+	}
+	
+	/**
+	 * edit method
+	 *
+	 * @param string $id
+	 * @return void
+	 */
+	public function edit($id = null) {
+		$this -> OfficeType -> id = $id;
+		if (!$this -> OfficeType -> exists()) {
+			throw new NotFoundException(__('Tipo de oficina no válido'));
+		}
+		if ($this -> request -> is('post') || $this -> request -> is('put')) {
+			if (!empty($this -> request -> data['OfficeType']['icono_image']['name']) && !$this -> request -> data['OfficeType']['icono_image']['error']) {
+				$now = new DateTime('now');
+				$filename = $now -> format('Y-m-d_H-i-s') . '_' . str_replace(' ', '_', $this -> request -> data['OfficeType']['icono_image']['name']);
+				if ($this -> uploadFile($this -> request -> data['OfficeType']['icono_image']['tmp_name'], $filename)) {
+					$this -> request -> data['OfficeType']['icono_image'] = 'img' . DS . 'uploads' . DS . $filename;
+				}
+			}
+			$this -> OfficeType -> create();
+			if ($this -> OfficeType -> save($this -> request -> data)) {
+				//debug($this -> request -> data);
+				$this -> Session -> setFlash(__('Se guardó el tipo de oficina'), 'crud/success');
+				$this -> redirect(array('action' => 'index'));
+			} else {
+				$this -> Session -> setFlash(__('No se pudo guardar el tipo de oficina. Por favor, intente de nuevo.'), 'crud/error');
+			}
+		} else {
+			$this -> request -> data = $this -> OfficeType -> read(null, $id);
 		}
 	}
 	
@@ -64,10 +96,10 @@ class OfficeTypesController extends AppController {
 	}
 
 	private function cleanupFiles() {
-		$officeTypes = $this -> OfficeType -> find('all');
+		$officeTypes = $this -> OfficeType -> find('all', array('recursive' => -1));
 		$db_files = array();
 		foreach ($officeTypes as $key => $officeType) {
-			$db_files[] = $officeTypes['OfficeType']['icono_image'];
+			$db_files[] = $officeType['OfficeType']['icono_image'];
 		}
 		$dir_files = array();
 		$dir_path = APP . 'webroot' . DS . 'img' . DS . 'uploads';
@@ -85,29 +117,6 @@ class OfficeTypesController extends AppController {
 				$tmp_file_path = $dir_path . DS . $file;
 				unlink($tmp_file_path);
 			}
-		}
-	}
-
-	/**
-	 * edit method
-	 *
-	 * @param string $id
-	 * @return void
-	 */
-	public function edit($id = null) {
-		$this -> OfficeType -> id = $id;
-		if (!$this -> OfficeType -> exists()) {
-			throw new NotFoundException(__('Tipo de oficina no válido'));
-		}
-		if ($this -> request -> is('post') || $this -> request -> is('put')) {
-			if ($this -> OfficeType -> save($this -> request -> data)) {
-				$this -> Session -> setFlash(__('Se guardó el tipo de oficina'), 'crud/success');
-				$this -> redirect(array('action' => 'index'));
-			} else {
-				$this -> Session -> setFlash(__('No se pudo guardar el tipo de oficina. Por favor, intente de nuevo.'), 'crud/error');
-			}
-		} else {
-			$this -> request -> data = $this -> OfficeType -> read(null, $id);
 		}
 	}
 

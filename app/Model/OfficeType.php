@@ -35,10 +35,25 @@ class OfficeType extends AppModel {
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+				'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+			'validarUpdate' => array(
+				'rule' => array('validarUpdate'),
+				//'message' => 'Debe ingresar una imagen de ícono',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				'on' => 'update', // Limit validation to 'create' or 'update' operations
 			),
 		),
 	);
+	
+	public function validarUpdate() {
+		if(isset($this -> data['OfficeType']['icono_image']['error']) && $this -> data['OfficeType']['icono_image']['error'] > 0) {
+			unset($this -> data['OfficeType']['icono_image']);
+		}
+		return true;
+	}
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
