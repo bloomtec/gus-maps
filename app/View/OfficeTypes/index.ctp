@@ -18,7 +18,7 @@
 			<td><?php echo h($officeType['OfficeType']['descripcion']); ?>&nbsp;</td>
 			<td>
 				<?php //echo h($officeType['OfficeType']['icono_image']); ?>&nbsp;
-				<img height="24" src="/<?php echo $officeType['OfficeType']['icono_image']; ?>" />
+				<img style="max-height:40px;" src="/<?php echo $officeType['OfficeType']['icono_image']; ?>" />
 			</td>
 			<td class="actions"><?php echo $this -> Html -> link(__('Ver'), array('action' => 'view', $officeType['OfficeType']['id'])); ?>
 			<?php echo $this -> Html -> link(__('Modificar'), array('action' => 'edit', $officeType['OfficeType']['id'])); ?>

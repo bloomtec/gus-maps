@@ -17,14 +17,12 @@
 			&nbsp;
 		</dd>-->
 		<dt><?php echo __('Latitud'); ?></dt>
-		<dd>
+		<dd class='lat'>
 			<?php echo h($city['City']['latitud']); ?>
-			&nbsp;
 		</dd>
 		<dt><?php echo __('Longitud'); ?></dt>
-		<dd>
+		<dd class='lng'>
 			<?php echo h($city['City']['longitud']); ?>
-			&nbsp;
 		</dd>
 		<dt><?php echo __('Creado'); ?></dt>
 		<dd>
@@ -37,17 +35,21 @@
 			&nbsp;
 		</dd>
 	</dl>
+	<div id="city-view-map" class='mapView'>
+		
+	</div>
 </div>
 <div class="actions">
 	<h3><?php echo __('Acciones'); ?></h3>
 	<ul>
 		<li><?php echo $this->Html->link(__('Modificar'), array('action' => 'edit', $city['City']['id'])); ?> </li>
 		<li><?php echo $this->Html->link(__('Volver'), array('action' => 'index')); ?> </li>
-	
+		<div style="clear:both;"></div>
 	</ul>
 </div>
+<!--
 <div class="related">
-	<h3><?php echo __('Related Offices');?></h3>
+	<h3><?php echo __('Oficinas');?></h3>
 	<?php if (!empty($city['Office'])):?>
 	<table cellpadding = "0" cellspacing = "0">
 	<tr>
@@ -64,7 +66,6 @@
 		$i = 0;
 		foreach ($city['Office'] as $office): ?>
 		<tr>
-			<td><?php echo $office['id'];?></td>
 			<td><?php echo $office['office_type_id'];?></td>
 			<td><?php echo $office['city_id'];?></td>
 			<td><?php echo $office['nombre'];?></td>
@@ -80,10 +81,5 @@
 	<?php endforeach; ?>
 	</table>
 <?php endif; ?>
-
-	<div class="actions">
-		<ul>
-			<li><?php echo $this->Html->link(__('New Office'), array('controller' => 'offices', 'action' => 'add'));?> </li>
-		</ul>
-	</div>
 </div>
+-->

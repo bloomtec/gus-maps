@@ -83,6 +83,33 @@ function initializeForOffices() {
 		updateCoordinates();
 	}
 }
+function initializeForOfficesView() {
+	var myOptions = {
+		zoom : 15,
+		mapTypeId : google.maps.MapTypeId.ROADMAP
+	};
+	map = new google.maps.Map(document.getElementById("office-view-map"), myOptions);
+	var latLng =  new google.maps.LatLng($('.lat').text(), $('.lng').text());
+
+		 marker = new google.maps.Marker({
+			position : latLng,
+			map : map,
+			draggable : true,
+			title : "Mueve el icono para actualizar la ubicación"
+		});
+		map.setCenter(latLng);
+
+}
+function initializeForCitiesView() {
+	var myOptions = {
+		zoom : 12,
+		mapTypeId : google.maps.MapTypeId.ROADMAP
+	};
+	map = new google.maps.Map(document.getElementById("city-view-map"), myOptions);
+	var latLng =  new google.maps.LatLng($('.lat').text(), $('.lng').text());
+	map.setCenter(latLng);
+
+}
 
 function initializeCity() {
 	if($('.lat').val() && $('.lng').val()) {
@@ -131,7 +158,11 @@ function updateCoordinates() {
 $(function() {
 	if($("#map_city").length) {
 		initializeCity();
-	} else {
+	} else if($("#office-view-map").length){
+		initializeForOfficesView();
+	}else if($("#city-view-map").length){
+		initializeForCitiesView();
+	}else{
 		initializeForOffices();
 	}
 	$('.cityQuery').autocomplete({
