@@ -4,7 +4,7 @@ var newyork = new google.maps.LatLng(40.69847032728747, -73.9514422416687);
 var browserSupportFlag = new Boolean();
 var map;
 var geocoder = new google.maps.Geocoder();
-var marker;
+var markers = [];
 function initialize() {
 	var myOptions = {
 		zoom : 14,
@@ -54,17 +54,15 @@ function initialize() {
 	}
 }
 
-
-
 function initializeMainMap() {
 	var myOptions = {
-		zoom : 5,
+		zoom : 12,
 		mapTypeId : google.maps.MapTypeId.ROADMAP
 	};
 	map = new google.maps.Map(document.getElementById("main_map"), myOptions);
 	var colombia = new google.maps.LatLng('4.570868', '-74.29733299999998');
-	map.setCenter(colombia);
-
+	updateCoordinates();
+	getOffices();
 }
 
 function handleNoGeolocation(errorFlag) {
@@ -78,19 +76,55 @@ function handleNoGeolocation(errorFlag) {
 	map.setCenter(initialLocation);
 }
 
-function customPosition() {
-	var latLng = new google.maps.LatLng($('.lat').val(), $('.lng').val());
-	map.setCenter(latLng);
+function getOffices() {
+	if(BJS.objectSize(markers)) {
+		for(i in markers) {
+			markers[i]['marker'].setMap(null);
+			markers[i]['infowindow'].setMap(null);
+		}
+		markers.length = 0;
+	}
+	BJS.JSON('/cities/getOffices/' + $('#ciudad option:selected').val() + '/' + $('#tipo option:selected').val(), {}, function(offices) {
+		$.each(offices, function(i, val) {
+			markers[val.Office.id]=[];
+			coordinates = new google.maps.LatLng(val.Office.latitud, val.Office.longitud);
+			markers[val.Office.id]['marker'] = new google.maps.Marker({
+				position : coordinates,
+				map : map,
+				draggable : true,
+				title : val.Office.nombre,
+				icon : '../' + val.OfficeType.icono_image
+			});
+			markers[val.Office.id]['marker'].setPosition(coordinates);
+			var contentString = '<div id="office-info">' + '<div class="name">' + val.Office.nombre + '</div>' + '<div class="description">' + val.Office.descripcion + '</div>' + '<div class="address">' + val.Office.direccion + '</div>' + '</div>';
+			markers[val.Office.id]['infowindow'] = new google.maps.InfoWindow({
+				content : contentString
+			});
+			google.maps.event.addListener(markers[val.Office.id]['marker'], 'click', function() {
+				markers[val.Office.id]['infowindow'].open(map, markers[val.Office.id]['marker']);
+			});
+		});
+		//marker.setPosition(coordinates);
+	});
 }
 
-function updateCoordinates() {
-	BJS.JSON('/cities/getCoordinates/' + $('.cityId option:selected').val(), {}, function(latLng) {
-		var coordinates = new google.maps.LatLng(latLng.lat, latLng.lng);
-		map.setCenter(coordinates);
-		marker.setPosition(coordinates);
+function updateCoordinates(cityId) {
+	BJS.JSON('/cities/getCoordinates/' + $('#ciudad option:selected').val(), {}, function(latLng) {
+		if(latLng) {
+			var coordinates = new google.maps.LatLng(latLng.lat, latLng.lng);
+			map.setCenter(coordinates);
+		}
+
 	});
 }
 
 $(function() {
 	initializeMainMap();
+	$('#ciudad').change(function() {
+		updateCoordinates();
+		getOffices();
+	});
+	$('#tipo').change(function() {
+		getOffices();
+	});
 });
