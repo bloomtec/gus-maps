@@ -86,7 +86,7 @@ function getOffices() {
 	}
 	BJS.JSON('/cities/getOffices/' + $('#ciudad option:selected').val() + '/' + $('#tipo option:selected').val(), {}, function(offices) {
 		$.each(offices, function(i, val) {
-			markers[val.Office.id]=[];
+			markers[val.Office.id] = [];
 			coordinates = new google.maps.LatLng(val.Office.latitud, val.Office.longitud);
 			markers[val.Office.id]['marker'] = new google.maps.Marker({
 				position : coordinates,
@@ -126,5 +126,28 @@ $(function() {
 	});
 	$('#tipo').change(function() {
 		getOffices();
+	});
+	$("#formGeo").submit(function(e) {
+		e.preventDefault();
+		geocoder.geocode({
+			address: $('#direccion').val()+","+$("#ciudad option:selected").text(),
+			region: 'CO'
+		}, function(results, status) {
+			
+			if(status == google.maps.GeocoderStatus.OK) {
+				for (dir in results){
+					console.log(results[dir].formatted_address);	
+				}			
+				map.setCenter(results[0].geometry.location);
+				map.setZoom(17);
+				/*var marker = new google.maps.Marker({
+					map : map,
+					position : results[0].geometry.location
+				});
+				*/
+			} else {
+				alert("No podemos encontrar la dirección dada" + status);
+			}
+		})
 	});
 });
