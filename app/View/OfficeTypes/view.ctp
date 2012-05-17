@@ -18,7 +18,8 @@
 		</dd>
 		<dt><?php echo __('Ícono'); ?></dt>
 		<dd>
-			<?php echo h($officeType['OfficeType']['icono_image']); ?>
+			<?php //echo h($officeType['OfficeType']['icono_image']); ?>
+			<img style="max-height:40px;" src="/<?php echo $officeType['OfficeType']['icono_image']; ?>" />
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Creado'); ?></dt>
@@ -32,17 +33,6 @@
 			&nbsp;
 		</dd>
 	</dl>
-</div>
-<div class="actions">
-	<h3><?php echo __('Acciones'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('Modificar Tipo De Oficina'), array('action' => 'edit', $officeType['OfficeType']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Eliminar Tipo De Oficina'), array('action' => 'delete', $officeType['OfficeType']['id']), null, __('Are you sure you want to delete # %s?', $officeType['OfficeType']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('Ver Tipos De Oficina'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('Agregar Tipo De Oficina'), array('action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('Ver Oficinar'), array('controller' => 'offices', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('Agregar Oficinas'), array('controller' => 'offices', 'action' => 'add')); ?> </li>
-	</ul>
 </div>
 <div class="related">
 	<h3><?php echo __('Oficinas Relacionadas');?></h3>
@@ -78,10 +68,12 @@
 	<?php endforeach; ?>
 	</table>
 <?php endif; ?>
-
-	<div class="actions">
-		<ul>
-			<li><?php echo $this->Html->link(__('Agregar Oficina'), array('controller' => 'offices', 'action' => 'add'));?> </li>
-		</ul>
-	</div>
+</div>
+<div class="actions">
+	<h3><?php echo __('Acciones'); ?></h3>
+	<ul>
+		<li><?php echo $this->Html->link(__('Modificar'), array('action' => 'edit', $officeType['OfficeType']['id'])); ?> </li>
+		<li><?php echo $this->Html->link(__('Volver'), array('action' => 'index')); ?> </li>
+		<div style="clear:both;"></div>
+	</ul>
 </div>

@@ -6,8 +6,8 @@
 			<th><?php echo $this->Paginator->sort('username', 'Usuario');?></th>
 			<th><?php echo $this->Paginator->sort('email', 'Correo');?></th>
 			<th><?php echo $this->Paginator->sort('is_active','Activo');?></th>
-			<th><?php echo $this->Paginator->sort('created','Creado');?></th>
-			<th><?php echo $this->Paginator->sort('updated','Actualizado');?></th>
+			<!--<th><?php echo $this->Paginator->sort('created','Creado');?></th>
+			<th><?php echo $this->Paginator->sort('updated','Actualizado');?></th>-->
 			<th class="actions"><?php echo __('Acciones');?></th>
 	</tr>
 	<?php
@@ -18,8 +18,8 @@
 		<td><?php echo h($user['User']['username']); ?>&nbsp;</td>
 		<td><?php echo h($user['User']['email']); ?>&nbsp;</td>
 		<td><?php echo h($user['User']['is_active']); ?>&nbsp;</td>
-		<td><?php echo h($user['User']['created']); ?>&nbsp;</td>
-		<td><?php echo h($user['User']['updated']); ?>&nbsp;</td>
+		<!--<td><?php echo h($user['User']['created']); ?>&nbsp;</td>
+		<td><?php echo h($user['User']['updated']); ?>&nbsp;</td>-->
 		<td class="actions">
 			<?php echo $this->Html->link(__('Ver'), array('action' => 'view', $user['User']['id'])); ?>
 			<?php echo $this->Html->link(__('Modificar'), array('action' => 'edit', $user['User']['id'])); ?>
