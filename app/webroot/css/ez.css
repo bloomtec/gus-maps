@@ -717,7 +717,7 @@ fieldset fieldset legend {
 	background-color: #333333;
 }	
 #ez .login-bg{
-	background-image: url(/img/ez/logo_fondo.png);
+
 	background-position: left bottom;
 	background-repeat: no-repeat;
 	width: 348px;
@@ -732,15 +732,14 @@ fieldset fieldset legend {
     top:50%;
     margin-top: -86px;
     left: 50%;
-    margin-left: -280px;
+    margin-left: -175px;
     padding: 10px;
 }
 #ez.login-layout #content{
 	background-color: #F4F2F2;
     border: 1px solid #000000;
     box-shadow: 1px 3px 2px #201F1F;
-    width: 560px;
-    background-image: url(/img/ez/ez_logo.png);
+    width: 350px;
     background-position: 45px 38px;
     background-repeat: no-repeat;
     min-height: 200px;

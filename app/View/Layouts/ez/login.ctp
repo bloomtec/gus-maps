@@ -42,7 +42,8 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 				<?php echo $content_for_layout;?>
 			</div>
 			<div id="footer">
-				powered by <a href="http://www.bloomweb.co"><img src="/img/ez/bloom_naranja.png" alt="bloomweb company" /></a>
+			<!--	powered by <a href="http://www.bloomweb.co"><img src="/img/ez/bloom_naranja.png" alt="bloomweb company" /></a>
+			-->
 			</div>
 		</div>
 		<?php echo $this -> element('sql_dump');?>

@@ -13,7 +13,7 @@ class UsersController extends AppController {
 	 * @return void
 	 */
 	public function login() {
-		$this -> layout = "login";
+		$this -> layout = "ez/login";
 		if ($this -> request -> is('ajax')) {
 			if ($this -> Auth -> login()) {
 				$this -> User -> recursive = -1;
@@ -29,7 +29,7 @@ class UsersController extends AppController {
 			exit(0);
 		} elseif ($this -> request -> is('post')) {
 			if ($this -> Auth -> login()) {
-				return $this -> redirect($this -> Auth -> redirect());
+				return $this -> redirect(array('controller'=>'cities','action'=>'index'));
 			} else {
 				$this -> Session -> setFlash(__('Usuario o contraseña no válidos'), 'default', array(), 'auth');
 			}
